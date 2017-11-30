@@ -17,9 +17,12 @@ var quotes = [
     { quote: "Do what you can, with what you have, where you are.", source: "Theodore Roosevelt" }
 ];
 
+var color = [ '#020202', '#0D2818', '#04471C', '#058C42', '#16DB65' ];
+
 //declaring global variables
 var randomQuoteObj;
 var randomQuote;
+var randomColor;
 var output;
 
 //this function generates a random integer from 0 to the array length and then returns the random quote object
@@ -27,6 +30,14 @@ function getRandomNumber () {
     randomNumber = Math.floor( Math.random() * quotes.length);
     return quotes[randomNumber]; 
 }
+
+function randomColor () {
+    randomColor = Math.floor( Math.random() * color.length);
+    return color[randomColor];
+}
+
+
+
 
 //this function prints the random quote to the dive on the page
 function printQuote () {
@@ -43,5 +54,6 @@ function printQuote () {
     // this targets the correct div in the DOM and prints the string in output
     var htmlDiv = document.getElementById('quote-box'); 
     htmlDiv.innerHTML= output;
+    document.getElementById(body).style.backgroundColor = randomColor();
 }
 
