@@ -31,6 +31,7 @@ function getRandomNumber () {
     return quotes[randomNumber]; 
 }
 
+//this function is selecting a random HEX value from preselected colors in the color array
 function randomColor () {
     var randomColorHex = Math.floor( Math.random() * color.length);
     randomColor = color[randomColorHex];
@@ -39,7 +40,7 @@ function randomColor () {
 randomColor();
 
 
-//this function prints the random quote to the dive on the page
+//this function prints the random quote to the div on the page
 function printQuote () {
     randomQuote = getRandomNumber();
     document.getElementById(main).style.backgroundColor = randomColor;
