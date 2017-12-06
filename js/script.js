@@ -25,6 +25,7 @@ var randomQuoteObj;
 var randomQuote;
 var randomColor;
 var output;
+var sheets = document.styleSheets[2];
 
 //this function generates a random integer from 0 to the array length and then returns the random quote object
 function getRandomNumber () {
@@ -57,6 +58,7 @@ function printQuote () {
     htmlDiv.innerHTML= output;
     //this will change the quote every 30 seconds
     window.setTimeout(printQuote, 30000);
+    sheets.insertRule("body { background-color: randomColor;}", 2);
 }
 
 
