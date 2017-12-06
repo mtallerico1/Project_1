@@ -17,6 +17,7 @@ var quotes = [
     { quote: "Do what you can, with what you have, where you are.", source: "Theodore Roosevelt", tag: "motivation" }
 ];
 
+//array of colors chosen to keep colors simple and within a certain color family
 var color = [ '#020202', '#0D2818', '#04471C', '#058C42', '#16DB65' ];
 
 //declaring global variables
@@ -32,18 +33,16 @@ function getRandomNumber () {
 }
 
 //this function is selecting a random HEX value from preselected colors in the color array
-function randomColor () {
+function randomColorGen () {
     var randomColorHex = Math.floor( Math.random() * color.length);
     randomColor = color[randomColorHex];
 }
 
-randomColor();
-
+randomColorGen();
 
 //this function prints the random quote to the div on the page
 function printQuote () {
     randomQuote = getRandomNumber();
-    document.getElementById(main).style.backgroundColor = randomColor;
     output = '<p class="quote">' + randomQuote.quote + '</p>';
     // this if else statement looks to see weather the quote has citation and year in the object and then adds the neccesary html 
     if (randomQuote.citation && randomQuote.year) {
@@ -56,5 +55,8 @@ function printQuote () {
     // this targets the correct div in the DOM and prints the string in output
     var htmlDiv = document.getElementById('quote-box'); 
     htmlDiv.innerHTML= output;
+    //this will change the quote every 30 seconds
+    window.setTimeout(printQuote, 30000);
 }
+
 
