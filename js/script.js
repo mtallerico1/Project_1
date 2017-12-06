@@ -1,8 +1,3 @@
-// event listener to respond to "Show another quote" button clicks
-// when user clicks anywhere on the button, the "printQuote" function is called
-document.getElementById('loadQuote').addEventListener("click", printQuote, false);
-
-
 // declaring an array of objects to contain quotes and pertinent information
 var quotes = [
     { quote: "For there is nothing lost, that may be found, if sought." , source:"Edmund Spenser", citation:"The Faerie Queen", tag: "inspiration" },
@@ -25,7 +20,6 @@ var randomQuoteObj;
 var randomQuote;
 var randomColor;
 var output;
-var sheets = document.styleSheets[2];
 
 //this function generates a random integer from 0 to the array length and then returns the random quote object
 function getRandomNumber () {
@@ -33,13 +27,11 @@ function getRandomNumber () {
     return quotes[randomNumber]; 
 }
 
-//this function is selecting a random HEX value from preselected colors in the color array
-function randomColorGen () {
-    var randomColorHex = Math.floor( Math.random() * color.length);
-    randomColor = color[randomColorHex];
+//this sets the background color randomly from the preselected color array
+function randomBodyColor () {
+    var randomColorHex = color[Math.floor( Math.random() * color.length)];
+    document.body.style.backgroundColor = randomColorHex; 
 }
-
-randomColorGen();
 
 //this function prints the random quote to the div on the page
 function printQuote () {
@@ -47,18 +39,25 @@ function printQuote () {
     output = '<p class="quote">' + randomQuote.quote + '</p>';
     // this if else statement looks to see weather the quote has citation and year in the object and then adds the neccesary html 
     if (randomQuote.citation && randomQuote.year) {
-        output += '<p class="source">' + randomQuote.source + '<span class="citation">' + randomQuote.citation + '</span>' + '<span class="year">' + randomQuote.year + '</span>' + '</p>';
+        output += '<p class="source">' + randomQuote.source + '<span class="citation">' + randomQuote.citation + '</span>' + '<span class="year">' + randomQuote.year + '</span>' + '<span class="tag">' + randomQuote.tag + '</span>' +  '</p>';
     } else if (randomQuote.citation) {
-        output += '<p class="source">' + randomQuote.source + '<span class="citation">' + randomQuote.citation + '</span>' + '</p>';
+        output += '<p class="source">' + randomQuote.source + '<span class="citation">' + randomQuote.citation + '</span>' + '</span>' + '<span class="tag">' + randomQuote.tag + '</span>' + '</p>';
     } else {
-        output += '<p class="source">' + randomQuote.source + '</p>';
-    }
+        output += '<p class="source">' + randomQuote.source + '</span>' + '<span class="tag">' + randomQuote.tag + '</span>' + '</p>';
+    } 
     // this targets the correct div in the DOM and prints the string in output
     var htmlDiv = document.getElementById('quote-box'); 
     htmlDiv.innerHTML= output;
-    //this will change the quote every 30 seconds
-    window.setTimeout(printQuote, 30000);
-    sheets.insertRule("body { background-color: randomColor;}", 2);
+    //calling the random color function
+    randomBodyColor();
 }
 
+printQuote();
+
+//calls printQuote function after 15 seconds
+window.setTimeout(printQuote, 15000);
+
+// event listener to respond to "Show another quote" button clicks
+// when user clicks anywhere on the button, the "printQuote" function is called
+document.getElementById('loadQuote').addEventListener("click", printQuote, false);
 
